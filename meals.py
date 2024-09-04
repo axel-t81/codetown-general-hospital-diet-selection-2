@@ -7,12 +7,8 @@ TO UDATE ....It then calculates the average protein, carbohydrates, fat, and kil
 __author__ = "Axel Tracy"
 __version__ = "0.1.0"
 
-# Initialise empty Lists for each nutritional macro
-# Use Lists as they allow duplicates, are changeable, and are iterable and can be worked on
-# all_protein = []
-# all_carbs = []
-# all_fat = []
-# all_kjs = []
+# Import Statements
+import math 
 
 # Initialise global variables used in program
 # justify = " "
@@ -20,11 +16,6 @@ line = "*"
 
 # A function to collect valid input for nutritional macro data.
 # This function validates input to confirm (a) it is a number that fits the requirements of a float, and (b) that it is non-negative.
-# For citing sources, this function is from learning from StackOverflow.
-# My original StackOverflow question was asked here: https://stackoverflow.com/questions/78814504/in-python-why-is-this-negative-float-passing-the-non-negative-while-loop-test-c
-# And not only did @Andrew Yim answer my original question, he pointed me to a StackFlow guide on how to better tackle this input validation problem.
-# The guide he pointed me to was here: https://stackoverflow.com/questions/23294658/asking-the-user-for-input-until-they-give-a-valid-response
-# For learning quickly about Try and Except, this guide was used: https://www.youtube.com/watch?v=MImAiZIzzd4
 def non_negative_only(prompt):
     """Validate patient number input."""
     while True:
@@ -42,8 +33,16 @@ def non_negative_only(prompt):
     return value
 
 
+# Find the first digit 
+def first_digit_calc(first_digit) : 
+    """Returns first digit of Patient ID."""
+    # Remove last digit from number till only one digit is left 
+    while first_digit >= 10:  
+        first_digit = first_digit / 10; 
+      
+    # return the first digit 
+    return int(first_digit) 
 
-### THIS CAN BE UPDATED TO TEST FOR VALID PATIENT ID
 # A function to collect valid input for patients numbers.
 # This function validates input to confirm (a) it is an integer to count people, and (b) that it is positive and above zero.
 def valid_patient_id(prompt):
@@ -54,13 +53,14 @@ def valid_patient_id(prompt):
         except:
             print("\nSorry, I didn't understand your input. Let's try again, using a whole number for the Patient ID, as your input please.")
             continue
-########## UP TO HERE
-# trying to write a conditional to test the length of the int, b/c it must be 6 digits
-# You have found a solution on StackOverflow, so see the link reference in assignments sheet
-# This function, overall, is meant to be used in Requirement 1 (below) and that is the step you are up to in KISS Requirements        
-        if value 
-        if value < 1:
-            print("\nSorry, the number of patients must be a positive number. Please try again.")
+
+#### UP TO HERE: Cannot get 0 validation to work.
+        first_digit = prompt[0] 
+        if first_digit == "0":
+            print("\nSorry, the Patient ID cannot start with 0. Please try again.")
+            continue
+        elif int(math.log10(value)+1) != 6:
+            print("\nSorry, the Patient ID must be 6 numbers. Please try again.")
             continue
         else:
             break
@@ -79,14 +79,14 @@ def main():
 
     # Requirement 1: "Your program should start by asking for the patient id (which is a six-digit positive integer with no leading zeroes)"
     # This uses the function above to return a six-digit integer to the variable
-    patient_id = valid_patient_id("\nPlease enter the Patient ID ")
+    patient_id = valid_patient_id("\nPlease enter the Patient ID: ")
 
     # For UI and user-friendliness, provide feedback and guidance to user of where they are in the program.
     print("\n\nSTEP 1 of 2 - PATIENT NUTRITION COLLECTION:")
 
     # Requirement 2: "loop this number of times to collect the amount of protein, carbohydrates, and fat required for each patient."
     # Using range() allows the for loop to be interable over an int, and solved an error message previously received
-    for x in range(patients):
+    for x in range(patient_id):
         # For UI and user-friendliness, when describing patient to user, add 1 to zero-based index and typecast int x to string
         # This String variable is used in the prompts below.
         x_string = str(x + 1)
