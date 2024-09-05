@@ -11,8 +11,11 @@ __version__ = "0.1.0"
 import math 
 
 # Initialise global variables used in program
-# justify = " "
 line = "*"
+protein = 0.00
+carbohydrates = 0.00
+fat = 0.00
+# justify = " "
 
 # A function to collect valid input for nutritional macro data.
 # This function validates input to confirm (a) it is a number that fits the requirements of a float, and (b) that it is non-negative.
@@ -67,6 +70,15 @@ def valid_patient_id(prompt):
     return value
 
 
+## UP TO HERE: NEED TO STUDY (a) Dictionaries (b) Functions
+def choose_diet(protein, carbohydrates, fat)
+    pass
+
+## UP TO HERE: NEED TO STUDY (a) Dictionaries (b) Functions
+def calculate_error()
+
+
+
 
 # The main function; guarded by the meals.py script entry point below.
 def main():
@@ -82,35 +94,17 @@ def main():
     patient_id = valid_patient_id("\nPlease enter the Patient ID: ")
 
     # For UI and user-friendliness, provide feedback and guidance to user of where they are in the program.
-    print("\n\nSTEP 1 of 2 - PATIENT NUTRITION COLLECTION:")
+    print("\n\nPATIENT NUTRITION COLLECTION:")
 
-    # Requirement 2: "loop this number of times to collect the amount of protein, carbohydrates, and fat required for each patient."
-    # Using range() allows the for loop to be interable over an int, and solved an error message previously received
-    for x in range(patient_id):
-        # For UI and user-friendliness, when describing patient to user, add 1 to zero-based index and typecast int x to string
-        # This String variable is used in the prompts below.
-        x_string = str(x + 1)
+    # Requirement 2: "your program must ask for the amount of protein, carbohydrates, and fat required by that patient (which must all be non-negative numbers)."
 
-        # This uses the function above to return an float to the variable
-        protein = non_negative_only("\nHow many grams of protein is required for patient " + x_string + "? ")
-        # Append most recent float input to end of appropriate List.
-        all_protein.append(protein)
+    # This uses the function above to return an float to the variable
+    protein = non_negative_only("\nHow many grams of protein is required for the patient with ID " + patient_id + "? ")
 
-        carbs = non_negative_only("\nHow many grams of carbohydrates are required for patient " + x_string + "? ")
-        all_carbs.append(carbs)
+    carbohydrates = non_negative_only("\nHow many grams of carbohydrates are required for the patient with ID " + patient_id + "? ")
 
-        fat = non_negative_only("\nHow many grams of fat is required for patient " + x_string + "? ")
-        all_fat.append(fat)
+    fat = non_negative_only("\nHow many grams of fat is required for the patient with ID " + patient_id + "? ")
 
-        # Calculate Kjs for each patient, and add it to the appropriate List
-        kilojoules_unrounded = (4.18 * (4 * protein + 4 * carbs + 9.30 * fat))
-        # Using the round() function to handle complex float; 
-        # Setting precision to 4 to not lose data within calculations, even though the output is later formatted to 2 decinal places
-        kilojoules = round(kilojoules_unrounded, 4)
-        all_kjs.append(kilojoules)
-
-    # Calculate and Output Averages of All Four Lists
-    print("\n\nSTEP 2 of 2 - CALCULATED PATIENT INFORMATION:\n")
 
     
     ### YES, HAS BEEN UPDATED AND/OR CONFIRMED STILL HOLDS
