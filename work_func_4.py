@@ -19,16 +19,16 @@ def calculate_error(diet, requirements):
 
 
 
-test_dict = {
+test_diet = {
     "protein": 16.0,
     "carbohydrates": 50.0,
     "fat": 23.00
 }
 
-kidney_dict = {
+kidney_diet = {
     "protein": 15.0,
     "carbohydrates": 55.0,
     "fat": 23.65
 }
 
-calculate_error(kidney_dict, test_dict)
+calculate_error(kidney_diet, test_diet)

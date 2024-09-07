@@ -1,9 +1,12 @@
 # Find the first digit 
-def first_digit_calc(first_digit) : 
-    """Returns first digit of Patient ID."""
-    # Remove last digit from number till only one digit is left 
-    while first_digit >= 10:  
-        first_digit = first_digit / 10; 
-      
-    # return the first digit 
-    return int(first_digit) 
+def leading_zero_check(n) : 
+    """Checks for leading zero."""
+    first = n[0]
+    if first == "0":
+        print("It's False")
+        return False
+    else:
+        print("It's True")
+        return True
+
+leading_zero_check("1000000")
