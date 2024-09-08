@@ -46,7 +46,6 @@ kidney_diet = {
 # This function was meant to validate Patient ID was valid input, a positive number, did not have leading zeros, and was 6 digits
 # INCOMPLETE / NOT WORKING, OPTION 1
 # def valid_patient_id(prompt):
-#    """Validate the nutritional macro input."""
 #    while True:
 #        first = prompt[0]
 #        try:
@@ -224,16 +223,21 @@ if __name__ == "__main__":
 
 
 
-
-
-### FROM PROGASSIGN1
 # References:
-# * https://www.python-boilerplate.com/py3+executable - For boilerplate code to start with.
 # * https://www.w3schools.com/python/ - Guidance on using in-built Python functions.
 # * https://www.geeksforgeeks.org/ - Guidance on using in-built Python functions.
-# * https://stackoverflow.com/questions/1995615/how-can-i-format-a-decimal-to-always-show-2-decimal-places - Guidance to learn about f-strings.
-# * https://chatgpt.com/c/89aff71f-f728-4fdb-96c1-9e5930a845a6 - Guidance to find out why my original input validation had false negative errors in testing.
-# * https://realpython.com/if-name-main-python/ - Guidance to learn about the if-name-main conditional statement, and why programs are set up this way.
-# * https://www.britannica.com/topic/large-numbers-1765137 - Guidance when working out how to setup the right_align function.
-# * https://packaging.python.org/en/latest/guides/making-a-pypi-friendly-readme/ - For guidance with the README.md file
+# * https://stackoverflow.com/questions/2189800/how-to-find-length-of-digits-in-an-integer
+# * https://www.w3schools.com/python/ref_math_log10.asp
+# * https://www.tutorialspoint.com/python/number_log10.htm
+# * https://www.geeksforgeeks.org/find-first-last-digits-number/
+# * https://www.jeremymorgan.com/python/how-to-get-first-character-of-a-string-in-python/
+# * https://www.w3schools.com/PYTHON/python_dictionaries_add.asp
+# * https://www.geeksforgeeks.org/python-minimum-value-keys-in-dictionary/
+# * https://www.geeksforgeeks.org/python-get-key-from-value-in-dictionary/
+# * https://www.geeksforgeeks.org/create-an-empty-file-using-python/
+# * https://www.geeksforgeeks.org/create-a-new-text-file-in-python/
+# * https://www.w3schools.com/python/python_file_write.asp
+# * https://stackoverflow.com/questions/4288973/whats-the-difference-between-s-and-d-in-string-formatting
+# * https://www.geeksforgeeks.org/formatted-string-literals-f-strings-python/
+# * https://www.geeksforgeeks.org/g-fact-41-multiple-return-values-in-python/=
 
