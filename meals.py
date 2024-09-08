@@ -9,13 +9,41 @@ __version__ = "0.1.0"
 
 # Import Statements
 import math 
+import os
 
-# Initialise global variables used in program
+# Initialise global variables and dictionaries used in program
+cwd = os.getcwd()
 line = "*"
-protein = 0.00
-carbohydrates = 0.00
-fat = 0.00
 # justify = " "
+normal_diet = {
+    "protein": 32.5,
+    "carbohydrates": 60.0,
+    "fat": 40.86
+}
+
+oncology_diet = {
+    "protein": 35.0,
+    "carbohydrates": 52.5,
+    "fat": 37.63
+}
+
+cardiology_diet = {
+    "protein": 32.5,
+    "carbohydrates": 30.0,
+    "fat": 26.88
+}
+
+diabetes_diet = {
+    "protein": 20.0,
+    "carbohydrates": 27.5,
+    "fat": 27.95
+}
+
+kidney_diet = {
+    "protein": 15.0,
+    "carbohydrates": 55.0,
+    "fat": 23.65
+}
 
 # A function to collect valid input for nutritional macro data.
 # This function validates input to confirm (a) it is a number that fits the requirements of a float, and (b) that it is non-negative.
@@ -35,6 +63,8 @@ def non_negative_only(prompt):
             break
     return value
 
+def valid_patient_id(prompt):
+    patient_id = input(prompt)
 
 # Find the first digit 
 #def first_digit_calc(first_digit) : 
@@ -88,6 +118,32 @@ def calculate_error(diet, requirements):
     fat_error = abs(fat_diet - fat_req)
 
     total_error = (pro_error + carb_error + fat_error)
+    return total_error
+
+def choose_diet(protein, carbohydrates, fat):
+    patient_diet = {
+        "protein": protein,
+        "carbohydrates" : carbohydrates,
+        "fat": fat
+        }
+    error_dict = {}
+    error_dict["Normal"] = calculate_error(normal_diet, patient_diet)
+    error_dict["Oncology"] = calculate_error(oncology_diet, patient_diet)
+    error_dict["Cardilogy"] = calculate_error(cardiology_diet, patient_diet)
+    error_dict["Diabetes"] = calculate_error(diabetes_diet, patient_diet)
+    error_dict["Kidney"] = calculate_error(kidney_diet, patient_diet)
+    print(error_dict)
+
+    temp = min(error_dict.values())
+    print(temp)
+
+    key_list = list(error_dict.keys())
+    val_list = list(error_dict.values())
+    lowest_error_diet = val_list.index(temp)
+    lowest_error_diet_key = (key_list[lowest_error_diet])
+    print(lowest_error_diet_key)
+
+    return lowest_error_diet_key
 
 
 
@@ -118,15 +174,19 @@ def main():
     fat = non_negative_only("\nHow many grams of fat is required for the patient with ID " + patient_id + "? ")
 
 
-    
-    ### YES, HAS BEEN UPDATED AND/OR CONFIRMED STILL HOLDS
+    diet_data = choose_diet(protein, carbohydrates, fat)
+
+    file_contents = f"{patient_id},{diet_data}\n"
+
+    with open(os.path.join(cwd, 'meals.csv'), 'a') as file:
+        file.write(file_contents)
+
     # Final out to provide feedback to user, and confirm the program is complete, and they can safely shut down.
     print("\n" + line*100)
-    print("THE SYSTEM IS NOW COMPLETE: YOUR PATIENTS' NUTRIBUTION-BASED DIET SELECTIONS HAVE BEEN MADE.\nTHESE DIETS HAVE BEEN SENT TO THE KITCHEN VIA A CSV FILE.\nPLEASE CLOSE THIS PROGRAM OR RUN AGAIN. THANK YOU.")
+    print("THE SYSTEM IS NOW COMPLETE: YOUR PATIENTS' NUTRITION-BASED DIET SELECTIONS HAVE BEEN MADE.\nTHESE DIETS HAVE BEEN SENT TO THE KITCHEN VIA A CSV FILE.\nPLEASE CLOSE THIS PROGRAM OR RUN AGAIN. THANK YOU.")
     print(line*100 + "\n")
 
 
-### YES, HAS BEEN UPDATED AND/OR CONFIRMED STILL HOLDS
 # This is the entry point of the meals.py program/script.
 # This code in this conditional statement runs when executed as a script from the command line; the file object passing to the interpreter evaluates as True.
 # But this code will not run when functions are imported via a module; only the function would be used externally.
@@ -151,52 +211,3 @@ if __name__ == "__main__":
 # * https://www.britannica.com/topic/large-numbers-1765137 - Guidance when working out how to setup the right_align function.
 # * https://packaging.python.org/en/latest/guides/making-a-pypi-friendly-readme/ - For guidance with the README.md file
 
-
-
-
-# A function to format the averages output.
-# The idea and template here was drawn from my submission to the Week 3 Assessable Tutorial, the 'Right Justify' problem.
-# In short, there are three scenarios to this selection statement;
-# 1) A standard number that is 12 digits or less, which should cover all cases in regards to the current nutrition use case,
-# 2) A alternative option if there an extremely large number with 13 to 30 digits, which should be highly unlikely.
-# 3) A final catch-all case, to tie up any number that isn't covered by the last two options.
-# def right_align(input_string):
-#    """Calculate the length of the input string and align string to the right."""
-#    info = input_string
-#    characters = len(info)
-#    if characters <= 12:
-#        blanks = 12 - characters
-#        return (blanks*justify + info)
-#    elif (12 < characters <= 30):
-#        blanks = 30 - characters
-#        return (blanks*justify + info)
-#    else:
-#        return info
-
-
-## The main function; guarded by the diet.py script entry point below.
-# def main():
-
-
-## Calculating the average by summing List items to get a total for numerator; and using len() function to count items to use as denominator
-    ## This is rounded to two decimal places to improve UI and user experience
-    #protein_average_float = round(sum(all_protein) / len(all_protein),2)
-    ## 1) Using the right_align function decribed earlier
-    ## 2) Typecasting the float, the average, to a string so it can be used in string concatination
-    ## 3) Using the f-string capabilities of Python to format the output to 2 decimal places
-    #protein_average = right_align(str(f'{protein_average_float:.2f}'))
-    ## The justify variable is used here by manually calculating the length of string to left and hardcoding into string; the goal of this is to have all strings of the average calculations in line with each other.
-    ## Achieving this goals allow easier recognigtion of the size of each number, e.g. 1000 should be easily distinguishable vs 100.
-    #print("Protein - The average protein over all patients is:" + justify*13 + protein_average + " grams")
-    #
-    #carbs_average_float = round(sum(all_carbs) / len(all_carbs),2)
-    #carbs_average = right_align(str(f'{carbs_average_float:.2f}'))
-    #print("Carbohydrates - The average carbohydrates over all patients is:" + justify*1 + carbs_average + " grams")
-    #
-    #fat_average_float = round(sum(all_fat) / len(all_fat),2)
-    #fat_average = right_align(str(f'{fat_average_float:.2f}'))
-    #print("Fat - The average fat over all patients is:" + justify*21 + fat_average + " grams")
-    #
-    #kjs_average_float = round(sum(all_kjs) / len(all_kjs),2)
-    #kjs_average = right_align(str(f'{kjs_average_float:.2f}'))
-    #print("Kilojoules - The average kilojoules over all patients is:" + justify*7 + kjs_average + " kJs\n")

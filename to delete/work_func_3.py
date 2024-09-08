@@ -1,5 +1,9 @@
 ## UP TO HERE: NEED TO STUDY (a) Dictionaries (b) Functions
 
+import os
+
+cwd = os.getcwd()
+
 patient_req_protein = 37.5
 patient_req_carbohydrates = 45.0
 patient_req_fat = 30.88
@@ -70,9 +74,15 @@ def choose_diet(protein, carbohydrates, fat):
     key_list = list(error_dict.keys())
     val_list = list(error_dict.values())
     lowest_error_diet = val_list.index(temp)
-    print(key_list[lowest_error_diet])
+    lowest_error_diet_key = (key_list[lowest_error_diet])
+    print(lowest_error_diet_key)
 
-    return lowest_error_diet
+    return lowest_error_diet_key
 
+temp_patient_id = 123456
+diet_data = choose_diet(patient_req_protein, patient_req_carbohydrates, patient_req_fat)
 
-choose_diet(patient_req_protein, patient_req_carbohydrates, patient_req_fat)
+file_contents = f"\n{temp_patient_id},{diet_data}"
+
+with open(os.path.join(cwd, 'meals.csv'), 'a') as file:
+    file.write(file_contents)
