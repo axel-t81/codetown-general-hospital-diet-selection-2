@@ -6,7 +6,7 @@ It then prints the diet selection to a csv file, for persistency.
 """
 # Program Details
 __author__ = "Axel Tracy"
-__version__ = "0.1.8"
+__version__ = "0.1.9"
 
 # Import Statements
 import math 
@@ -40,49 +40,6 @@ kidney_diet = {
     "carbohydrates": 55.0,
     "fat": 23.65
 }
-
-#########
-# COULD NOT get full Patient ID validation working
-# This function was meant to validate Patient ID was valid input, a positive number, did not have leading zeros, and was 6 digits
-# INCOMPLETE / NOT WORKING, OPTION 1
-# def valid_patient_id(prompt):
-#    while True:
-#        first = prompt[0]
-#        try:
-#            value = int(input(prompt))
-#        except:
-#            print("\nSorry, I didn't understand your input. Let's try again, using numbers for your Patient ID, as your input please.")
-#            continue
-#        if value < 1:
-#            print("\nSorry, the Patient ID must be a positive number. Please try again.")
-#            continue
-#        ## The two tests above are working well
-#        ## But the two below are not
-#        elif first == "0":
-#            print("\nSorry, the Patient ID provided starts with 0; which is invalid. Please input the Patient ID, again.")
-#            print("Value is", value, "Leading Zero Check")
-#            print("First is", first, "Leading Zero Check")
-#            continue
-#        elif math.log10((value)+1) != 6:
-#            print("\nSorry, the Patient ID must be 6 numbers. Please try again.")
-#            print("Value is", value, "math check")
-#            print("First is", first, "math Check")
-#            continue
-#        else:
-#            break
-#    return value
-#############
-# INCOMPLETE / NOT WORKING, OPTION 2
-#def valid_patient_id(prompt):
-#    while True:
-#        leading_zeros = len(prompt.split('1', 1)[0])
-#        value_string = str(input(prompt))
-#        if leading_zeros > 0:
-#            print("\nSorry, the Patient ID provided starts with 0; which is invalid. Please input the Patient ID, again.")
-#            continue
-#        else:
-#            break
-#    return value_string
 
 # Since I didn't get the full Patient ID Validation working, this function was my workaround
 # This function confirms the Patient ID is a valid integer, and is a positive, non-negative number
